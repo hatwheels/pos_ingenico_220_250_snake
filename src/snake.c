@@ -10,26 +10,21 @@
 static const long difficulty[6] = {100, 90, 80, 70, 60, 50};
 static size_t user_diff = 2;
 
-static long snake_get_difficulty (void)
-{
+static long snake_get_difficulty (void) {
   return difficulty[user_diff];
 }
 
-static void snake_set_difficulty (size_t new_diff)
-{
+static void snake_set_difficulty (size_t new_diff) {
   user_diff = new_diff;
 }
 
-static void snake_rng_pixel (blob *pixel, blob *player, unsigned int* size)
-{
+static void snake_rng_pixel (blob *pixel, blob *player, unsigned int* size) {
   int x = rand () % Xmax;
   int y = rand () % Ymax;
   int idx;
 
-  for (idx = 0; idx < *size; idx++)
-  {
-    if (x == Xmin || y == Xmin || (x == player[idx].xs && y == player[idx].ys))
-    {
+  for (idx = 0; idx < *size; idx++) {
+    if (x == Xmin || y == Xmin || (x == player[idx].xs && y == player[idx].ys)) {
       idx = -1;
       x = rand () % Xmax;
       y = rand () % Ymax;
@@ -39,15 +34,12 @@ static void snake_rng_pixel (blob *pixel, blob *player, unsigned int* size)
   pixel->ys = y;
 }
 
-static blob* snake_pixel_hit (blob *player, unsigned int *size, blob* pixel, blob* buffer)
-{
-  if (player[*size - 1].xs == pixel->xs && player[*size - 1].ys == pixel->ys)
-  {
+static blob* snake_pixel_hit (blob *player, unsigned int *size, blob* pixel, blob* buffer) {
+  if (player[*size - 1].xs == pixel->xs && player[*size - 1].ys == pixel->ys) {
     int idx;
     blob *temp = (blob *) realloc (player, ++(*size) * sizeof (blob));
 
-    if (temp == NULL)
-    {
+    if (temp == NULL) {
       free (player);
       return NULL;
     }
@@ -55,8 +47,7 @@ static blob* snake_pixel_hit (blob *player, unsigned int *size, blob* pixel, blo
     player[*size - 1].xs = player[*size - 2].xs;
     player[*size - 1].ys = player[*size - 2].ys;
     player[*size - 1].xe =  player[*size - 1].ye = 0;
-    for (idx = *size - 2; idx > 0; idx--)
-    {
+    for (idx = *size - 2; idx > 0; idx--) {
       player[idx].xs = player[idx - 1].xs;
       player[idx].ys = player[idx - 1].ys;
     }
@@ -70,24 +61,21 @@ static blob* snake_pixel_hit (blob *player, unsigned int *size, blob* pixel, blo
   return player;
 }
 
-static unsigned char snake_collision (blob* player, unsigned int * size)
-{
+static unsigned char snake_collision (blob* player, unsigned int * size) {
   unsigned int idx;
 
   if (player[*size - 1].xs == Xmin || player[*size - 1].xs == Xmax ||
         player[*size - 1].ys == Ymin || player[*size - 1].ys == Ymax)
     return TRUE;
 
-  for (idx = 0; idx < *size - 1; idx++)
-  {
+  for (idx = 0; idx < *size - 1; idx++) {
     if (player[*size - 1].xs == player[idx].xs && player[*size - 1].ys == player[idx].ys)
       return TRUE;
   }
   return FALSE;
 }
 
-static void snake_step (blob* player, unsigned int* size, blob* direction)
-{
+static void snake_step (blob* player, unsigned int* size, blob* direction) {
   int idx;
 
   for (idx = 0; idx < *size; idx++)
@@ -118,8 +106,7 @@ static int snake_main (timer* tm, const blob* wall, blob* player, unsigned int* 
       snake_step (player, size, &direction);
 
       /// collision detection
-      if (snake_collision (player, size))
-      {
+      if (snake_collision (player, size)) {
         char menu[2][DISPLAY_COL + 1] = {"RESTART", "QUIT"};
 
         display_publish (0, "GAME OVER!", 0, 0, DP_INFO);
@@ -153,8 +140,7 @@ static int snake_main (timer* tm, const blob* wall, blob* player, unsigned int* 
           switch (execute_menu ("PAUSE", (char *) menu, 4, 1, MF_NUMBERED | MF_MAIN |  MF_NO_TIMEOUT)) {
             case 1: ///Continue
               break;
-            case 2: ///Difficulty
-              {
+            case 2: { ///Difficulty
                 char menu[6][DISPLAY_COL + 1] = {"VERY EASY", "EASY", "NORMAL", "HARD", "VERY HARD", "INSANE"};
                 int ret = execute_menu ("DIFFICULTY", (char *) menu, 6, 1, MF_NUMBERED | MF_MAIN |  MF_NO_TIMEOUT);
 
