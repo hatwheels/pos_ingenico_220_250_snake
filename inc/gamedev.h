@@ -2,7 +2,7 @@
  * gamedev.h
  *
  *  Created on: Mar 10, 2017
- *      Author: kmarkostamos
+ *      Author: hatwheels
  */
 
 #if !defined(__GAMEDEV_H__)

@@ -2,7 +2,7 @@
  * snake.c
  *
  *  Created on: Mar 10, 2017
- *      Author: kmarkostamos
+ *      Author: hatwheels
  */
 
 #include "inc/snake.h"
