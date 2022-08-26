@@ -1,5 +1,5 @@
 # Snake-Clone running on Ingenico 220/250 POS
-* Uses **Telium SDK** (of Ingenico) and IngeDEV IDE (an Ingenico customized **Eclipse IDE**)
+* Uses **Telium SDK** (of SAGEM Monotel) and IngeDEV IDE (an Ingenico customized **Eclipse IDE**)
 * [Snake-Clone gameplay](https://www.youtube.com/watch?v=T1Z9uBWw0vA)
 
 **NOTE**: **Telium SDK** and **IngeDEV** IDE are proprietary, license-based and documentation about them is scarcily available. Officially, only SAGEM Monotel will provide training and all the information for setting up, developing, building and debugging. Therefore, I strongly advise anyone who wants to tinker with Ingenico POS, to ask any merchant selling Ingenico POS the following questions:
